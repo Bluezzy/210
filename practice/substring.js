@@ -8,7 +8,7 @@ function substr(string, start, length) {
   }
 
   for (i = start, index = 1; i < string.length; i++, index++) {
-    if index <= length {
+    if (index <= length) {
       newString += string[i]
     }
   }
