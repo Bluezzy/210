@@ -1,4 +1,4 @@
-function isInAlphabet (character) {
+function isInAlphabet(character) {
   character = String(character);
   if (character.length != 1) {
     return false;
@@ -8,20 +8,20 @@ function isInAlphabet (character) {
   return (asciiNumeric >= 97 && asciiNumeric <= 122); 
 }
 
-function cipher(character) {
-  character = String(character);
-  if (character.length != 1) {
-    return false;
-  }
+function isInlastHalfAlphabet(character) { // ('n' to 'z') or ('N' to 'Z')
+  var asciiNumeric = character.toLowerCase().charCodeAt();
+  return (asciiNumeric <= 122 && asciiNumeric >= 110);
+}
 
+function cipher(character) {
   var charCode = character.charCodeAt();
   var cipheredCharCode = charCode;
   var cipheredCharacter;
 
-  if (isInAlphabet(character)) { // 'a' to 'z' || 'A' to 'Z'
-    if ( (charCode <= 122 && charCode >= 110) || (charCode <= 90 && charCode >= 78) ) { // ('n' to 'z') or ('N' to 'Z') (bottom half of the alphabet)
+  if (isInAlphabet(character)) { 
+    if (isInlastHalfAlphabet(character)) {
       cipheredCharCode -= 13; // we go down half of the alphabet
-    } else { // remaining caracters of the alphabet: ('a' to 'm') or ('A' to 'M')
+    } else { // all remaining characters
       cipheredCharCode += 13; // we go up half of the alphabet
     }
   }
