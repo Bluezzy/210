@@ -94,12 +94,3 @@ function join(array, joiningString) {
 	}
 	return result;
 }
-
-
-
-
-
-
-
-
-//
