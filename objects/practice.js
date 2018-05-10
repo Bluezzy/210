@@ -23,11 +23,24 @@ function copyProperties(obj1, obj2) {
 
 function wordCount(string) {
 	var words = string.split(' ');
-	var count = 0;
 	var index;
 	result = {};
 
 	for (index in words) {
-		
+		if (result[words[index]]) {
+			result[words[index]]++;
+		}	else {
+			result[words[index]] = 1;
+		}
 	}
+
+	return result;
 }
+
+function greetings(name, status) {
+	var nameOutput = name.join(' ');
+	var i;
+	var statusOutput = status.title + " " + status.occupation;
+	console.log('Hello, ' + nameOutput + '! We\'re proud to have a ' + statusOutput + ' here !')
+}
+
