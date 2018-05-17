@@ -159,39 +159,3 @@ function realSize(word) {
 function isLetter(letter) {
   return (letter.toLowerCase() >= 'a' && letter.toLowerCase() <= 'z')
 }
-
-function dms(number) {
-  var MINUTES_PER_DEGREE = 60;
-  var SECONDS_PER_MINUTE = 60;
-  var totalSeconds = number * MINUTES_PER_DEGREE * SECONDS_PER_MINUTE;
-  var degrees = Math.floor(totalSeconds / MINUTES_PER_DEGREE / SECONDS_PER_MINUTE);
-  var remainingSeconds = totalSeconds - (degrees * MINUTES_PER_DEGREE * SECONDS_PER_MINUTE);
-  var minutes = Math.floor(remainingSeconds / SECONDS_PER_MINUTE);
-  remainingSeconds -= (minutes * SECONDS_PER_MINUTE);
-  return String(degrees) + '\xb0' + String(minutes) + '\'' + String(remainingSeconds) + '"';
-}
-
-function copyNonDupsTo(resultArray, array) {
-  array.forEach(function (value) {
-                  if (resultArray.indexOf(value) === -1) {
-                    resultArray.push(value);
-                  }
-                });
-}
-
-function union(array1, array2) {
-  var newArray = [];
-  copyNonDupsTo(newArray, array1);
-  copyNonDupsTo(newArray, array2);
-  return newArray;
-}
-
-
-
-
-
-
-
-
-
-//
