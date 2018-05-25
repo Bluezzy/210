@@ -39,8 +39,17 @@ var studentScores = {
 function generateClassRecordSummary(scores) {
   var records = {};
   records.studentGrades = [];
+
+  for (studentData in scores) {
+    var score = getScore(scores[studentData]);
+    var letterGrade = getLetterGrade(score);
+    records.studentGrades.push(formatGrade(score, letterGrade));
+  };
+
   var examsData = getExamsData(scores);
   records.exams = stats(examsData); 
+
+  return records;
 }
 
 function getExamsData(scores) {
@@ -90,50 +99,29 @@ function getSum(numbers) {
   });
 }
 
-function getStudentScore(studentData) {
+function getScore(studentData) {
   var examsScore = getAverage(studentData.scores.exams);
-  var exercicesScore = getSum(studentData.scores.exercices);
-  return Math.round(examsScore * 0.65 + exercicesScore * 0.35);
+  var exercisesScore = getSum(studentData.scores.exercises);
+  return Math.round(examsScore * 0.65 + exercisesScore * 0.35);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-generateClassRecordSummary(studentScores);
-
-// returns:
-{
-  studentGrades: [ '87 (B)', '73 (D)', '84 (C)', '86 (B)', '56 (F)' ],
-  exams: [
-    { average: 75.6, minimum: 50, maximum: 100 },
-    { average: 86.4, minimum: 70, maximum: 100 },
-    { average: 87.6, minimum: 60, maximum: 100 },
-    { average: 91.8, minimum: 80, maximum: 100 },
-  ],
+function getLetterGrade(score) {
+  if (score >= 93) { 
+    return 'A';
+  } else if (score >= 85) {
+    return 'B';
+  } else if (score >= 77) {
+    return 'C';
+  } else if (score >= 69) {
+    return 'D';
+  } else if (score >= 60) {
+    return 'E';
+  } else {
+    return 'F';
+  }
 }
 
-*/
+function formatGrade(score, letterGrade) {
+  return (String(score) + ' (' + letterGrade + ')');
+}
+
