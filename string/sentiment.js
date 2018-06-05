@@ -34,21 +34,36 @@ var textExcerpt = 'To be or not to be-that is the question:\n' +
   'The fair Ophelia.-Nymph, in thy orisons\n' +
   'Be all my sins remembered';
 
-var positiveWords = ['fortune', 'dream', 'love', 'respect', 'patience', 'devout', 'noble', 'resolution'];
-var negativeWords = ['die', 'heartache', 'death', 'despise', 'scorn', 'weary', 'trouble', 'oppress'];
+var positiveRegex = /(fortunes?)|(dream(s|t|ed)?)|(love(s|d)?)|(respect(s|ed)?)|(patien(ce|t)?)|(devout(ly)?)|(nobler?)|(resolut(e|ion)?)/gi;
+var negativeRegex = /(die(s|d)?)|(heartached?)|(death)|(despise(s|d)?)|(scorn(s|ed)?)|(weary)|(troubles?)|(oppress(es|ed|or('s)?)?)/gi;
+
 
 function sentiment(text) {
-  // ...
+  var textPositiveWords = text.match(positiveRegex);
+  var textNegativeWords = text.match(negativeRegex);
+
+  var positiveCount = textPositiveWords.length;
+  var negativeCount = textNegativeWords.length;
+
+  var overallSentiment = getOverallSentiment(positiveCount, negativeCount)
+
+  sentimentFormat(overallSentiment, positiveCount, negativeCount, textPositiveWords, textNegativeWords);
 }
 
-sentiment(textExcerpt);
+function getOverallSentiment(positiveCount, negativeCount) {
+  if (positiveCount < negativeCount) {
+    return 'negative';
+  } else if (positiveCount > negativeCount) {
+    return 'positive';
+  } else {
+    return 'neutral'
+  }
+}
 
-/*
-There are 5 positive words in the text.
-Positive sentiments: fortune, dream, respect, love, resolution
-
-There are 6 negative words in the text.
-Negative sentiments: die, heartache, die, death, weary, death
-
-The sentiment of the text is Negative.
-*/
+function sentimentFormat(sentiment, positiveCount, negativeCount, positiveWords, negativeWords) {
+  console.log('There are ' + positiveCount + ' positive words in the text.');
+  console.log('Positive sentiments: ' + positiveWords.join(', '));
+  console.log('\nThere are ' + negativeCount + ' negative words in the text.');
+  console.log('Negative sentiments: ' + negativeWords.join(', '));
+  console.log('\nThe sentiment of the text is ' + sentiment + '.')
+}
