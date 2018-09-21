@@ -1,12 +1,13 @@
 // input: uncleaned string
 // output: boolean
 
+// TEST AND EDGE CASES:
 // isLuhnValid('') => false
 // isLuhnValid('irej') => false
 // isLunhValid('1111") => false
 // isLunhValid('8kokfr763') => true
 
-// Lunh Formula :
+// Lunh Formula : Mental Model
 // '8763' => [8, 7, 6, 3] => [3, 6, 7, 8] => [3, 12, 7, 16] => [3, 3, 7, 7] => 3 + 3 + 7 + 7 => 20
 
 // Computing Algorithm :
