@@ -3,7 +3,7 @@
 // Each row and each column must contain all numbers from 1 to 9,
 // and they must appear only once.
 
-//input : we assume that a sudoku board is an array of 9 subarrays, each one with 9 numbers from 1 to 9.
+// input : we assume that a sudoku board is an array of 9 subarrays, each one with 9 numbers from 1 to 9.
 // output : boolean
 
 // A ) VALID LINE ALGORITHM (input : array of numbers)
