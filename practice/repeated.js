@@ -1,4 +1,12 @@
-// Algorithm 1 : Work with unique elements, seems to work best.
+// -------------- HELPER METHODS //
+
+function allDuplicates(array, value) {
+	return array.filter(function(currentValue) {
+		return value === currentValue;
+	});
+}
+
+// Solution 1 : Work with unique elements, seems to work best.
 
 //1. filter the original array into a unique array :
 //    - if the index of the element is not equal to  the first index where whe element appears, reject it.  
@@ -17,7 +25,36 @@ function repeatedElems(array) {
 	});
 }
 
-// Algorithm 2 : Brute force attempt : sorting issue, only work with adjacent elemeents.
+// Solution 2 using helper method to get all duplicated and reduce
+
+function duplicatedElements(arr) {
+	var seen = [];
+	return arr.reduce(function(resultArray, currentElement) {
+		if (!seen.includes(currentElement)) {
+			seen.push(currentElement);
+			resultArray.push(allDuplicates(arr, currentElement));
+		}
+		return resultArray;
+	}, []);
+}
+
+// Solution 3 using helper method to get all duplicates, no reduce.
+
+function duplicatedEls(arr) {
+  var seen = [];
+  var result = [];
+  var i;
+
+  for (i = 0; i < arr.length; i++) {
+    if (!seen.includes(arr[i])) {
+    	seen.push(arr[i]);
+    	result.push(allDuplicates(arr, arr[i]));
+    }	
+  }
+  return result;	
+}
+
+// Wrong Solution 4 : Brute force attempt : sorting issue, only work with adjacent elemeents.
 
 // 1. sort the array
 // 2. reduce the original array with empty array as initial value. keep track of current element and current index.
@@ -41,7 +78,7 @@ function repeatedElements(arr) {
 	}, []);
 }
 
-// Algorithm 3 : using an eleement count object :
+// Wrong Solution 5 : using an eleement count object :
 //               - issue that 1 and '1' are different elemeents, but it will be, at best,
 //           hard to manipulate them when they become keys, and at worst, will become the same key.
 //               - too many changes of data structure make it hard to implement (array to object back to array of subarrays).
@@ -74,3 +111,18 @@ function repeatedEls(arr) {
 
 
 arr = [2, 1, 2, "1", 3, "hello", 2, "hi", 1, "hi"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
